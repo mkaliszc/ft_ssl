@@ -1,30 +1,52 @@
 #pragma once
 
 # include "../OctoLIB/include/libft.h"
+# include <stdint.h>
+
+// Used for comparing bitmask information
+# define FLAG_P		(1 << 0)
+# define FLAG_Q		(1 << 1)
+# define FLAG_R		(1 << 2)
+
+// Used to be more clearer, not big signification
+# define IS_FLAG	1
+# define IS_FLAG_S	2
+# define IS_TOK		3
 
 # define COMMAND_INFO "[INFO] Avaible command : md5, sha256\n"
-# define FLAGS_MD5 "[INFO] Avaible flags (optionnal) :\n\t-p = echo STDIN to STDOUT and append the checksum to STDOUT.\n\t-q = quiet mode.\n\t-r = reverse the format of the output.\n\t-s = print the sum of the given string.\n"
-# define FLAGS_SHA256 "[INFO] Avaible flags (optionnal) :\n\t-p = echo STDIN to STDOUT and append the checksum to STDOUT.\n\t-q = quiet mode.\n\t-r = reverse the format of the output.\n\t-s = print the sum of the given string.\n"
 
-typedef enum e_input_type {
-	FILE,
-	STDIN,
-	STRING
-} t_input_type;
+typedef enum e_src
+{
+	SRC_STDIN,
+	SRC_FILE,
+	SRC_STRING
+}	t_src;
 
 typedef struct s_command_ssl {
 	char	*func_name;
-	int		(*run)(int argc, char **argv);
-	
-} t_command_ssl;
+	int		(*run)(int argc, char **argv);	
+}	t_command_ssl;
 
-typedef struct s_input {
-	char			*input_name;
-	t_input_type	input_type;
-} t_input;
+typedef struct s_operand {
+	char	*input_name; // File name or String
+	char	*data; // Used for store data when name is needed
+	size_t	len;
+	t_src	src_type;
+}	t_operand;
+
+typedef struct s_options {
+	uint8_t		flags;
+	char		*label;
+	t_operand	*operands;
+	size_t		nb_op;
+}	t_options;
 
 // General
 void	dispatch_cmd(int argc, char **argv);
+
+// Digest familly
+bool	digest_parser(int argc, char **argv, t_options *opt);
+void	handle_operand(char *str, t_operand *op);
 
 // MD5
 int		md5_func(int argc, char **argv);
