@@ -8,8 +8,6 @@ int	md5_func(int argc, char** argv) {
 		return(-1);
 	}
 	opt->operands = NULL;
-	ft_memset(&(opt->operands), 0 , argc);
-
 	opt->flags = 0;
 	opt->label = "MD5";
 
@@ -18,5 +16,5 @@ int	md5_func(int argc, char** argv) {
 		return (1);
 	}
 	// exec function call
-	return(0);
+	return(ssl_digest_cleaner(opt), 0);
 }

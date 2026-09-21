@@ -28,17 +28,17 @@ typedef struct s_command_ssl {
 }	t_command_ssl;
 
 typedef struct s_operand {
-	char	*input_name; // File name or String
-	char	*data; // Used for store data when name is needed
-	size_t	len;
-	t_src	src_type;
-	t_operand	*next;
+	char				*input_name; // File name or String
+	char				*data; // Used for store data when name is needed
+	size_t				len;
+	t_src				src_type;
+	struct s_operand	*next;
 }	t_operand;
 
 typedef struct s_options {
 	uint8_t		flags;
 	char		*label;
-	t_operand	**operands;
+	t_operand	*operands;
 }	t_options;
 
 // General
@@ -47,6 +47,8 @@ void	dispatch_cmd(int argc, char **argv);
 // Digest familly
 bool	digest_parser(int argc, char **argv, t_options *opt);
 bool	handle_operand(char *name, t_src src, t_operand **operands);
+void	free_op(t_operand **op);
+void	ssl_digest_cleaner(t_options *opt);
 
 // MD5
 int		md5_func(int argc, char **argv);
@@ -58,3 +60,4 @@ int		sha256_func(int argc, char **argv);
 t_operand	*new_op(char *name, t_src src);
 void		add_op(t_operand **lst, t_operand *new);
 void		add_front_op(t_operand **lst, t_operand *new);
+void		print_op_lst(t_operand *lst);
