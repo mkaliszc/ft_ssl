@@ -32,13 +32,13 @@ typedef struct s_operand {
 	char	*data; // Used for store data when name is needed
 	size_t	len;
 	t_src	src_type;
+	t_operand	*next;
 }	t_operand;
 
 typedef struct s_options {
 	uint8_t		flags;
 	char		*label;
-	t_operand	*operands;
-	size_t		nb_op;
+	t_operand	**operands;
 }	t_options;
 
 // General
@@ -46,10 +46,15 @@ void	dispatch_cmd(int argc, char **argv);
 
 // Digest familly
 bool	digest_parser(int argc, char **argv, t_options *opt);
-void	handle_operand(char *str, t_operand *op);
+bool	handle_operand(char *name, t_src src, t_operand **operands);
 
 // MD5
 int		md5_func(int argc, char **argv);
 
 // sha256
 int		sha256_func(int argc, char **argv);
+
+// Utils
+t_operand	*new_op(char *name, t_src src);
+void		add_op(t_operand **lst, t_operand *new);
+void		add_front_op(t_operand **lst, t_operand *new);

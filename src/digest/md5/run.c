@@ -7,15 +7,10 @@ int	md5_func(int argc, char** argv) {
 		printf_fd(2, "[ERROR] md5_func : Opt Malloc error.\n");
 		return(-1);
 	}
-	opt->operands = malloc(sizeof(t_operand) * argc);
-	if (!opt->operands) {
-		printf_fd(2, "[ERROR] md5_func : operands Malloc error.\n");
-		return(-1);
-	}
+	opt->operands = NULL;
 	ft_memset(&(opt->operands), 0 , argc);
 
 	opt->flags = 0;
-	opt->nb_op = 0;
 	opt->label = "MD5";
 
 	if (digest_parser(argc, argv, opt)) {

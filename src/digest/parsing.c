@@ -28,13 +28,21 @@ bool digest_parser(int argc, char **argv, t_options *opt) {
 		}
 		else if (test == IS_FLAG_S) {
 			i++;
-			handle_operand(argv[i++], opt->operands);
+			if (argv[i]) {
+				printf_fd(2, "[ERROR] digest_parser : missing argument for -s flag.\n");
+				return 1; // a changer en fonction de l'evolution du code
+			}
+			handle_operand(argv[i++], SRC_STRING, opt->operands);
 		}
 	}
-	if (i == argc - 1) {
-		handle_stdint(opt->operands); // TODO : define
+
+	if (i == argc - 1 && (opt->flags & FLAG_P || !opt->operands)) {
+		handle_operand("stdin", SRC_STDIN, opt->operands);
 	}
-	while (i < argc && argv[i])  {
-		// TODO : handle oprrand 
+	else {
+		while (i < argc && argv[i]) {
+			handle_operand(argv[i++], SRC_FILE, opt->operands);
+		}
 	}
+	return 0; // a changer en fonction de l'evolution du code
 }
