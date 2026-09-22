@@ -35,6 +35,17 @@ typedef struct s_operand {
 	struct s_operand	*next;
 }	t_operand;
 
+typedef struct s_digest_ctx {
+	union {
+		uint32_t	md5[4];
+		uint32_t	sha256[8];
+		uint64_t	whirlpool[8];
+	}			state;
+	uint8_t		buffer[64];
+	size_t		buf_len;
+	uint64_t	total_len;
+}	t_digest_ctx;
+
 typedef struct s_options {
 	uint8_t		flags;
 	char		*label;

@@ -41,9 +41,8 @@ bool digest_parser(int argc, char **argv, t_options *opt) {
 		handle_operand("stdin", SRC_STDIN, &opt->operands);
 	}
 	while (argv[i] && i < argc) {
-			handle_operand(argv[i++], SRC_FILE, &opt->operands);
-		}
-	ft_printf("Digest parser done\n");
+		handle_operand(argv[i++], SRC_FILE, &opt->operands);
+	}
 	print_op_lst(opt->operands);
 	return 0; // a changer en fonction de l'evolution du code
 }

@@ -12,7 +12,7 @@ int	md5_func(int argc, char** argv) {
 	opt->label = "MD5";
 
 	if (digest_parser(argc, argv, opt)) {
-		ssl_digest_cleaner(opt); // TODO : define this function
+		ssl_digest_cleaner(opt);
 		return (1);
 	}
 	// exec function call

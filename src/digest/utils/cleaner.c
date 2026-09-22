@@ -7,7 +7,8 @@ void	free_op(t_operand **op) {
 		return ;
 	while (*op) {
 		pos = (*op)->next;
-		free((*op)->data);
+		if ((*op)->data)
+			free((*op)->data);
 		free(*op);
 		*op = pos;
 	}
