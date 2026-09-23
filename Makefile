@@ -24,7 +24,7 @@ SUCCESS  = $(LGREEN)[SUCCESS]$(RESET)
 # ============================================================================ #
 
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -Iinclude
+CFLAGS      = -Wall -Wextra -Werror -Iinclude -IOctoLIB/include
 
 # ============================================================================ #
 #                               DIRECTORIES                                    #

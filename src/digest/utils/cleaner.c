@@ -1,14 +1,13 @@
 # include "ft_ssl.h"
 
-void	free_op(t_operand **op) {
+static void	free_op(t_operand **op) {
 	t_operand	*pos;
 
 	if (op == NULL)
 		return ;
 	while (*op) {
 		pos = (*op)->next;
-		if ((*op)->data)
-			free((*op)->data);
+		free_chunks(&(*op)->chunks);
 		free(*op);
 		*op = pos;
 	}

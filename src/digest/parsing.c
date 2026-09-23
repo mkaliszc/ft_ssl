@@ -1,6 +1,6 @@
 # include "ft_ssl.h"
 
-int	flag_parser(char *str, t_options *opt) {
+static int	flag_parser(char *str, t_options *opt) {
 	char *valid_flag[4] = {"-p", "-q", "-r", "-s"};
 
 	for (size_t i = 0; i < 3; i++)

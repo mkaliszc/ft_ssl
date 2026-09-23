@@ -58,3 +58,4 @@ dkms.conf
 OctoLIB/
 *.pdf
 ft_ssl
+*.md
