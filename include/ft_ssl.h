@@ -16,7 +16,8 @@
 # define IS_FLAG_S	2
 # define IS_TOK		3
 
-# define COMMAND_INFO "[INFO] Avaible command : md5, sha256\n"
+# define COMMAND_INFO "[INFO] Available command : md5, sha256\n"
+# define FLAGS_INFO "[INFO] Available flags : -p (echo stdin), -q (quiet), -r (reverse), -s <string>\n"
 
 # define READ_SIZE			4096	// size of one read() and of one stdin chunk
 # define DIGEST_MAX_SIZE	64		// largest digest in bytes (whirlpool ready)
@@ -53,7 +54,6 @@ typedef struct s_digest_ctx {
 	union {
 		uint32_t	md5[4];
 		uint32_t	sha256[8];
-		uint64_t	whirlpool[8];
 	}				state;
 	uint8_t			buffer[BLOCK_SIZE];
 	size_t			buf_len;
@@ -94,7 +94,6 @@ void		ssl_digest_cleaner(t_options *opt);
 
 // Digest family : stdin kept for -p
 bool		add_chunk(t_chunk **lst, const uint8_t *data, size_t len);
-void		free_chunks(t_chunk **lst);
 
 // Digest core
 void		digest_update(t_digest_ctx *ctx, uint32_t *state, t_transform tf, const uint8_t *in, size_t len);

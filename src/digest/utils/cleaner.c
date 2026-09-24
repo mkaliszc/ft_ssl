@@ -1,5 +1,17 @@
 # include "ft_ssl.h"
 
+static void	free_chunks(t_chunk **lst) {
+	t_chunk	*next;
+
+	if (!lst)
+		return ;
+	while (*lst) {
+		next = (*lst)->next;
+		free(*lst);
+		*lst = next;
+	}
+}
+
 static void	free_op(t_operand **op) {
 	t_operand	*pos;
 
@@ -18,6 +30,5 @@ void	ssl_digest_cleaner(t_options *opt) {
 		free_op(&opt->operands);
 		free(opt);
 	}
-	ft_printf("everything alright\n");
 	return;
 }

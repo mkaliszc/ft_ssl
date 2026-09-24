@@ -6,8 +6,7 @@
 ** endianness of the length field : the logic itself is written once.
 */
 
-void	digest_update(t_digest_ctx *ctx, uint32_t *state, t_transform tf,
-			const uint8_t *in, size_t len) {
+void	digest_update(t_digest_ctx *ctx, uint32_t *state, t_transform tf, const uint8_t *in, size_t len) {
 	size_t	fill;
 
 	ctx->total_len += len;
@@ -39,8 +38,7 @@ void	digest_update(t_digest_ctx *ctx, uint32_t *state, t_transform tf,
 	ctx->buf_len = len;
 }
 
-void	digest_pad(t_digest_ctx *ctx, uint32_t *state, t_transform tf,
-			t_store64 store_len) {
+void	digest_pad(t_digest_ctx *ctx, uint32_t *state, t_transform tf, t_store64 store_len) {
 	uint64_t	bit_len = ctx->total_len * 8;
 
 	// 1. mandatory '1' bit right after the message

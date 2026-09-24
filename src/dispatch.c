@@ -12,12 +12,15 @@ void	dispatch_cmd(int argc, char **argv) {
 
 	while(command_list[i].func_name) {
 		if (ft_strcmp(argv[1], command_list[i].func_name) == 0) {
-			command_list[i].run(argc, argv);
+			if (command_list[i].run(argc, argv) == 1) {
+				exit(1);
+			}
 			exit(0);
 		}
 		i++;
 	}
 	printf_fd(2, "[INFO] dispatch_cmd : %s doesn't exist in this version.\n", argv[1]);
 	ft_printf(COMMAND_INFO);
+	ft_printf(FLAGS_INFO);
 	exit(0);
 }

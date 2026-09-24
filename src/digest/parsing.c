@@ -30,7 +30,7 @@ bool digest_parser(int argc, char **argv, t_options *opt) {
 			i++;
 			if (!argv[i]) {
 				printf_fd(2, "[ERROR] digest_parser : missing argument for -s flag.\n");
-				return 1; // a changer en fonction de l'evolution du code
+				return 1;
 			}
 			handle_operand(argv[i], SRC_STRING, &opt->operands);
 			i++;
@@ -43,6 +43,5 @@ bool digest_parser(int argc, char **argv, t_options *opt) {
 	while (argv[i] && i < argc) {
 		handle_operand(argv[i++], SRC_FILE, &opt->operands);
 	}
-	print_op_lst(opt->operands);
-	return 0; // a changer en fonction de l'evolution du code
+	return 0;
 }

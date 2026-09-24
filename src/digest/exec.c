@@ -1,6 +1,6 @@
 # include "ft_ssl.h"
 
-static int	feed_fd(t_options *opt, t_operand *op, t_digest_ctx *ctx, int fd) {
+static int	feed_fd(t_options *opt, t_operand *op, t_digest_ctx *ctx, int fd) { // 
 	uint8_t	buf[READ_SIZE];
 	ssize_t	n;
 	bool	keep = (op->src_type == SRC_STDIN && (opt->flags & FLAG_P));
@@ -26,8 +26,7 @@ static int	hash_operand(t_options *opt, t_operand *op, uint8_t *digest) {
 
 	opt->spec->init(&ctx);
 	if (op->src_type == SRC_STRING) {
-		opt->spec->update(&ctx, (const uint8_t *)op->input_name,
-			ft_strlen(op->input_name));
+		opt->spec->update(&ctx, (const uint8_t *)op->input_name, ft_strlen(op->input_name));
 	}
 	else if (op->src_type == SRC_STDIN) {
 		ret = feed_fd(opt, op, &ctx, 0);

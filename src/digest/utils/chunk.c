@@ -19,15 +19,3 @@ bool	add_chunk(t_chunk **lst, const uint8_t *data, size_t len) {
 	pos->next = new;
 	return (0);
 }
-
-void	free_chunks(t_chunk **lst) {
-	t_chunk	*next;
-
-	if (!lst)
-		return ;
-	while (*lst) {
-		next = (*lst)->next;
-		free(*lst);
-		*lst = next;
-	}
-}
